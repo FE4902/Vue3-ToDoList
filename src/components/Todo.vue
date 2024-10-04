@@ -1,8 +1,11 @@
 <script setup>
+import { ref } from "vue";
 const props = defineProps({
     todos: Array,
     filterTodos: Array,
 });
+
+const edit = ref(false);
 </script>
 
 <template>
@@ -12,14 +15,15 @@ const props = defineProps({
             v-for="todo in props.filterTodos"
             :key="filterTodos.id"
         >
-            <span class="todo__text" :class="{ complete: todo.isDone }">{{
-                todo.text
-            }}</span>
             <input
                 class="todo__checkbox"
                 type="checkbox"
                 v-model="todo.isDone"
             />
+            <span class="todo__text" :class="{ complete: todo.isDone }">{{
+                todo.text
+            }}</span>
+            <button @click="edit = true">✏️</button>
         </li>
     </ul>
 </template>

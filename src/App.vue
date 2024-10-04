@@ -2,6 +2,7 @@
 import Header from "./components/Header.vue";
 import Todo from "./components/Todo.vue";
 import Footer from "./components/Footer.vue";
+import Modal from "./components/Modal.vue";
 import { ref, watch } from "vue";
 
 const filter = ref("ALL");
@@ -71,6 +72,7 @@ const clearTodo = (value) => {
             @handleFilter="handleFilter"
             @clearTodo="clearTodo"
         />
+        <Modal />
     </div>
 </template>
 
