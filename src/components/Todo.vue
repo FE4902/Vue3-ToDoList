@@ -4,8 +4,6 @@ const props = defineProps({
     todos: Array,
     filterTodos: Array,
 });
-
-const edit = ref(false);
 </script>
 
 <template>

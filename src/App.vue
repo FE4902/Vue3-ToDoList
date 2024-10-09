@@ -5,13 +5,13 @@ import Footer from "./components/Footer.vue";
 import Modal from "./components/Modal.vue";
 import { ref, watch } from "vue";
 
-const filter = ref("ALL");
 const todos = ref([
     { id: 1, text: "방 청소", isDone: true },
     { id: 2, text: "신발 정리", isDone: false },
     { id: 3, text: "코딩 공부", isDone: false },
 ]);
-
+const editModal = ref(false);
+const filter = ref("ALL");
 const filterTodos = ref([...todos.value]);
 
 const insertTodo = (text) => {
@@ -31,6 +31,8 @@ const handleFilter = (state) => {
     filter.value = state;
     filterTodo(filter.value);
 };
+
+const handleEditModal = () => {};
 
 const filterTodo = (value) => {
     switch (value) {
@@ -61,12 +63,18 @@ const clearTodo = (value) => {
             break;
     }
 };
+
+const editTodo = (value) => {};
 </script>
 
 <template>
     <div class="wrap">
         <Header @insertTodo="insertTodo" />
-        <Todo :todos="todos" :filterTodos="filterTodos" />
+        <Todo
+            :todos="todos"
+            :filterTodos="filterTodos"
+            :editModal="editModal"
+        />
         <Footer
             :filter="filter"
             @handleFilter="handleFilter"
