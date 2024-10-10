@@ -11,6 +11,8 @@ const todos = ref([
     { id: 3, text: "코딩 공부", isDone: false },
 ]);
 const editModal = ref(false);
+const editTodo = ref({ id: 0, text: "", isDone: false });
+
 const filter = ref("ALL");
 const filterTodos = ref([...todos.value]);
 
@@ -32,7 +34,17 @@ const handleFilter = (state) => {
     filterTodo(filter.value);
 };
 
-const handleEditModal = () => {};
+const handleEditModal = (id) => {
+    editModal.value = true;
+    editTodo.value = todos.value.find((v) => v.id === id);
+};
+
+const handleEditTodo = (object) => {
+    todos.value = [
+        ...todos.value.filter((v) => v.id !== editTodo.id),
+        ...editTodo,
+    ].sort((a, b) => a - b);
+};
 
 const filterTodo = (value) => {
     switch (value) {
@@ -63,8 +75,6 @@ const clearTodo = (value) => {
             break;
     }
 };
-
-const editTodo = (value) => {};
 </script>
 
 <template>
@@ -73,14 +83,14 @@ const editTodo = (value) => {};
         <Todo
             :todos="todos"
             :filterTodos="filterTodos"
-            :editModal="editModal"
+            @handleEditModal="handleEditModal"
         />
         <Footer
             :filter="filter"
             @handleFilter="handleFilter"
             @clearTodo="clearTodo"
         />
-        <Modal />
+        <Modal :editTodo="editTodo" @handleEditTodo="handleEditTodo" />
     </div>
 </template>
 

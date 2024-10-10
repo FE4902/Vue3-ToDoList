@@ -1,18 +1,14 @@
 <script setup>
-import { ref } from "vue";
 const props = defineProps({
     todos: Array,
     filterTodos: Array,
 });
+const emit = defineEmits(["handleEditModal"]);
 </script>
 
 <template>
     <ul class="todo">
-        <li
-            class="todo__item"
-            v-for="todo in props.filterTodos"
-            :key="filterTodos.id"
-        >
+        <li class="todo__item" v-for="todo in props.filterTodos" :key="todo.id">
             <input
                 class="todo__checkbox"
                 type="checkbox"
@@ -21,7 +17,7 @@ const props = defineProps({
             <span class="todo__text" :class="{ complete: todo.isDone }">{{
                 todo.text
             }}</span>
-            <button @click="edit = true">✏️</button>
+            <button @click="emit('handleEditModal', todo.id)">✏️</button>
         </li>
     </ul>
 </template>

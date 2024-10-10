@@ -1,5 +1,8 @@
 <script setup>
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
+
+const props = defineProps({ editTodo: Object });
+const emit = defineEmits(["handleEditTodo"]);
 
 onMounted(() => {
     document.querySelector(".modal").show();
@@ -10,12 +13,12 @@ onMounted(() => {
     <dialog class="modal">
         <div class="modal__body">
             <h4>Edit Todo</h4>
-            <div>선택한 텍스트</div>
+            <div>{{ editTodo.text }}</div>
             <div>
-                <input type="text" />
+                <input type="text" :value="editTodo.text" />
             </div>
             <div class="">
-                <button>Confirm</button>
+                <button @click="handleEditTodo">Confirm</button>
                 <button>Cancel</button>
             </div>
         </div>
