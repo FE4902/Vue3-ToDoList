@@ -37,6 +37,8 @@ const handleFilter = (state) => {
 const handleEditModal = (id) => {
     editModal.value = true;
     editTodo.value = todos.value.find((v) => v.id === id);
+
+    document.querySelector(".modal").showModal();
 };
 
 const handleEditTodo = (object) => {
@@ -97,7 +99,6 @@ const clearTodo = (value) => {
 <style lang="scss" scoped>
 .wrap {
     padding: 16px;
-    margin: 16px;
     border: 1px solid black;
 }
 </style>
